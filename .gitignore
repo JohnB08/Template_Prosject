@@ -480,6 +480,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # Vim temporary swap files
-*.swp./compose.yaml
+*.swp
+./compose.yaml
 ./TemplateWebApi/appsettings.Development.json
 ./TemplateWebApi/appsettings.json
