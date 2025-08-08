@@ -487,3 +487,6 @@ $RECYCLE.BIN/
 ./compose.yaml
 ./TemplateWebApi/appsettings.Development.json
 ./TemplateWebApi/appsettings.json
+./compose.yaml
+./TemplateWebApi/appsettings.Development.json
+./TemplateWebApi/appsettings.json
