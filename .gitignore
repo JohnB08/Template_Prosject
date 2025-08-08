@@ -493,3 +493,7 @@ $RECYCLE.BIN/
 ./compose.yaml
 ./TemplateWebApi/appsettings.Development.json
 ./TemplateWebApi/appsettings.json
+*.tfvars
+*.hcl
+*.tfstate
+*.terraform/

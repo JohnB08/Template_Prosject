@@ -1,0 +1,37 @@
+#cloud-config
+users:
+    - name: ${username}
+      groups: sudo, docker
+      shell: /bin/bash
+      sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+
+package_update: true
+package_upgrade: false
+
+packages:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg
+    - lsb-release
+
+write_files
+    - path: /tmp/gpgkey.asc
+      permissions: "0600"
+      owner: root:root
+      content: |
+        ${indent(6, gpgkey)}
+
+runcmd:
+    - bash -lc 'install -m 0755 -d /ect/apt/keyrings'
+    - apt-get update
+    - apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+    - bash -lc ' curl -LO https://github.com/getsops/sops/releases/download/v3.10.2/sops-v3.10.2.linux.amd64 \
+                mv sops-v3.10.2.linux.amd64 /usr/local/bin/sops \
+                chmod +x /usr/local/bin/sops'
+    - bash -lc '--import /tmp/gpgkey.asc || true'
+    - usermod -aG docker ${username}
+
+    - rm -f /tmp/gpgkey.asc
+    
